@@ -1,0 +1,39 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "The backend part of the final project",
+  "main": "index.js",
+  "scripts": {
+    "start": "app.js",
+    "test": "jest",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yael-Kalach/news-explorer-api.git"
+  },
+  "author": "Yael Kalach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yael-Kalach/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Yael-Kalach/news-explorer-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "celebrate": "^15.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.5.1",
+    "express-winston": "^4.2.0",
+    "helmet": "^5.1.1",
+    "joi": "^17.6.0",
+    "joi-objectid": "^4.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.1",
+    "nodemon": "^2.0.19",
+    "validator": "^13.7.0",
+    "winston": "^3.8.1"
+  }
+}

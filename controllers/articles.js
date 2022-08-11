@@ -16,7 +16,8 @@ const createArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner } = req.body;
+    owner,
+  } = req.body;
   Article.create({
     keyword,
     title,
@@ -25,7 +26,8 @@ const createArticle = (req, res, next) => {
     source,
     link,
     image,
-    owner })
+    owner,
+  })
     .then((article) => res.send(article))
     .catch((err) => {
       next(err);

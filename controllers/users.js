@@ -48,7 +48,6 @@ const createUser = (req, res, next) => {
       const dataCopyNoPass = finalData;
       dataCopyNoPass.password = '';
       res.send({ dataCopyNoPass });
-      console.log('i am in createuser')
     })
     .catch((err) => {
       if (err.name === 'MongoServerError') {

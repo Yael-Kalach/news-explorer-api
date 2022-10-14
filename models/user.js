@@ -17,9 +17,17 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    default: 'Susie',
     minlength: 2,
     maxlength: 30,
+  },
+  saved: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "article",
+      },
+    ],
+    default: [],
   },
 });
 

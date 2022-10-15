@@ -60,6 +60,7 @@ const createUser = (req, res, next) => {
 
 const signIn = (req, res, next) => {
   const { email, password } = req.body;
+  debugger
   return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(

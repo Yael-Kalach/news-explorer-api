@@ -19,7 +19,7 @@ const articlesRouter = require('./routes/articles');
 const { createUser, signIn } = require('./controllers/users');
 const { getUserAuthSchema } = require('./utils/validators');
 
-mongoose.connect('mongodb://localhost:27017/aroundb').then((v) => console.log('connected to mongoDB!'));
+mongoose.connect('mongodb://localhost:27017/newsdb').then((v) => console.log('connected to mongoDB!'));
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const auth = require('./middlewares/auth');

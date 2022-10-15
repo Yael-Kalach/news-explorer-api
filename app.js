@@ -19,7 +19,7 @@ const app = express();
 // const { createUser, signIn } = require('./controllers/users');
 // const { getUserAuthSchema } = require('./utils/validators');
 
- mongoose.connect('mongodb://localhost:27017/newsdb').then(console.log('I connected to mongoose!'));
+mongoose.connect('mongodb://localhost:27017/aroundb').then((v) => console.log('connected to mongoDB'));
 
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 // const auth = require('./middlewares/auth');

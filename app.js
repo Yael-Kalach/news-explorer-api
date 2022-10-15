@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -15,7 +16,7 @@ const path = require('path');
 // routers
 const userRouter = require('./routes/users');
 const articlesRouter = require('./routes/articles');
-const { createUser, login } = require('./controllers/users');
+const { createUser, signIn } = require('./controllers/users');
 const { getUserAuthSchema } = require('./utils/validators');
 
 mongoose.connect('mongodb://localhost:27017/aroundb');
@@ -35,7 +36,7 @@ const { PORT = 3000 } = process.env;
 const { ErrorHandler } = require('./utils/error');
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyParser.json());
 app.use(requestLogger);
 app.use(limiter);
 app.use(express.json());
@@ -61,7 +62,7 @@ app.get('/crash-test', () => {
 });
 
 // Login and registration
-app.post('/signin', celebrate(getUserAuthSchema), login);
+app.post('/signin', celebrate(getUserAuthSchema), signIn);
 app.post('/signup', celebrate(getUserAuthSchema), createUser);
 
 // Centralized Error Handling

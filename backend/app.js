@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -43,7 +42,6 @@ app.use(helmet());
 app.use(cors());
 app.options('*', cors());
 
-app.use(bodyParser.json());
 app.disable('x-powered-by');
 
 // User and article routes

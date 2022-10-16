@@ -36,7 +36,6 @@ const { PORT = 3000 } = process.env;
 const { ErrorHandler } = require('./utils/error');
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
 app.use(requestLogger);
 app.use(limiter);
 app.use(express.json());
@@ -44,7 +43,9 @@ app.use(helmet());
 app.use(cors());
 app.options('*', cors());
 
+app.use(bodyParser.json());
 app.disable('x-powered-by');
+
 // User and article routes
 app.use('/users', auth, userRouter);
 app.use('/articles', auth, articlesRouter);

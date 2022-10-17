@@ -9,26 +9,21 @@ const getArticles = (req, res, next) => {
 
 const createArticle = (req, res, next) => {
   const {
-    keyword,
-    title,
-    text,
-    date,
-    source,
-    link,
-    image,
-    owner,
+    keyword, title, text, date, source, link, image,
   } = req.body;
+
   Article.create({
-    keyword,
-    title,
-    text,
-    date,
-    source,
-    link,
-    image,
-    owner,
+    keyword, title, text, date, source, link, image, owner: req.user._id,
   })
-    .then((article) => res.send(article))
+    .then((articles) => res.send({
+      keyword: articles.keyword,
+      title: articles.title,
+      text: articles.text,
+      date: articles.date,
+      source: articles.source,
+      link: articles.link,
+      image: articles.image,
+    }))
     .catch((err) => {
       next(err);
     });

@@ -33,8 +33,6 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  console.log('in create user')
-  console.log(req.body)
   const {
     email,
     password,

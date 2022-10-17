@@ -33,7 +33,6 @@ const getCreateArticlesSchema = {
     source: Joi.string().required(),
     link: Joi.string().custom(validateURL).required(),
     image: Joi.string().custom(validateURL).required(),
-    owner: Joi.objectId().required(),
   }),
 };
 

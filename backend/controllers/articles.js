@@ -24,6 +24,7 @@ const createArticle = (req, res, next) => {
       source: articles.source,
       link: articles.link,
       image: articles.image,
+      _id: articles._id
     }))
     .catch((err) => {
       console.log('error saving article:', err)

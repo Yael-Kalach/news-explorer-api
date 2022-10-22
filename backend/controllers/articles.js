@@ -8,10 +8,11 @@ const getArticles = (req, res, next) => {
 };
 
 const createArticle = (req, res, next) => {
+  console.log('in create article')
   const {
     keyword, title, text, date, source, link, image,
   } = req.body;
-
+  console.log(`req.user._id:`, req.user._id)
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
@@ -25,6 +26,7 @@ const createArticle = (req, res, next) => {
       image: articles.image,
     }))
     .catch((err) => {
+      console.log('error saving article:', err)
       next(err);
     });
 };

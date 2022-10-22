@@ -16,6 +16,9 @@ const createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
+    .then(() => {
+      const allarticles = Article.find({}).then(console.log('all articles:', allarticles))
+    })
     .then((articles) => res.send({
       keyword: articles.keyword,
       title: articles.title,

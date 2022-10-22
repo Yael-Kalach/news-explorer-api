@@ -16,11 +16,6 @@ const createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
-    .catch((err) => {
-      console.log('error saving article:', err)
-      console.log(err.stack);
-      next(err);
-    })
     .then((articles) => res.send({
       keyword: articles.keyword,
       title: articles.title,
@@ -30,6 +25,11 @@ const createArticle = (req, res, next) => {
       link: articles.link,
       image: articles.image,
     }))
+    .catch((err) => {
+      console.log('error saving article:', err)
+      console.log(err.stack);
+      next(err);
+    });
 };
 
 const deleteArticle = (req, res, next) => {

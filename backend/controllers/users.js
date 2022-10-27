@@ -21,10 +21,9 @@ const getUsers = (req, res, next) => {
 };
 
 const getUserById = (req, res, next) => {
-  const userId = req.params.userId ? req.params.userId : req.user._id;
-  User.findById(userId)
+  User.findById(req.user._id)
     .orFail(() => {
-      throw new ErrorHandler(404, `No user found with ID ${userId}`);
+      throw new ErrorHandler(404, `User not found`);
     })
     .then((user) => res.send(user))
     .catch((err) => {

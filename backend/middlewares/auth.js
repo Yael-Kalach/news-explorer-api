@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { ErrorHandler } = require('../utils/error');
 
-module.exports = (req, res, next) => {
+const auth = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
@@ -20,8 +20,11 @@ module.exports = (req, res, next) => {
     );
   } catch (err) {
     next(err);
+    throw new ErrorHandler(401, 'You are not authorized');
   }
   req.user = payload;
 
   next();
 };
+
+module.exports = auth;

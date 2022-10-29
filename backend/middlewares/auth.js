@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { ErrorHandler } = require('../utils/error');
 
-const auth = (req, res, next) => {
+module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
@@ -26,5 +26,3 @@ const auth = (req, res, next) => {
 
   next();
 };
-
-module.exports = auth;

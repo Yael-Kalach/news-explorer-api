@@ -5,20 +5,20 @@ const { ErrorHandler } = require('../utils/error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-// const getUsers = (req, res, next) => {
-//   User.find({})
-//     .orFail((err) => {
-//       if (err.name === 'DocumentNotFoundError') {
-//         res.status(404).send({ message: 'User not found' });
-//       } else {
-//         res.status(500).send({ message: 'An error has occurred on the server' });
-//       }
-//     })
-//     .then((users) => res.send({ data: users }))
-//     .catch((err) => {
-//       next(err);
-//     });
-// };
+const getUsers = (req, res, next) => {
+  User.find({})
+    .orFail((err) => {
+      if (err.name === 'DocumentNotFoundError') {
+        res.status(404).send({ message: 'User not found' });
+      } else {
+        res.status(500).send({ message: 'An error has occurred on the server' });
+      }
+    })
+    .then((users) => res.send({ data: users }))
+    .catch((err) => {
+      next(err);
+    });
+};
 
 const getUserById = (req, res, next) => {
   User.findById(req.user._id)
@@ -75,6 +75,7 @@ const signIn = (req, res, next) => {
 };
 
 module.exports = {
+  getUsers,
   getUserById,
   createUser,
   signIn,

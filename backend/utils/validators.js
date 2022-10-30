@@ -1,5 +1,5 @@
 const validator = require('validator');
-const { Segments } = require('celebrate');
+// const { Segments } = require('celebrate');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
@@ -18,11 +18,11 @@ const getUserAuthSchema = {
   }),
 };
 
-const getCurrentUserSchema = {
-  [Segments.PARAMS]: Joi.object().keys({
-    userId: Joi.objectId().required(),
-  }),
-};
+// const getCurrentUserSchema = {
+//   [Segments.PARAMS]: Joi.object().keys({
+//     userId: Joi.objectId().required(),
+//   }),
+// };
 
 const getCreateArticlesSchema = {
   body: Joi.object().keys({
@@ -44,7 +44,6 @@ const getDeleteArticlesSchema = {
 
 module.exports = {
   getUserAuthSchema,
-  getCurrentUserSchema,
   getCreateArticlesSchema,
   getDeleteArticlesSchema,
 };

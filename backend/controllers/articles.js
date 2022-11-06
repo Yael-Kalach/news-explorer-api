@@ -33,21 +33,12 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  Article.findOne({ _id: req.params.articleId })
-    .then((article) => {
-      if (!article) {
-        throw new NotFoundError("Article not found");
-      }
-      if (!article.owner.equals(req.user._id)) {
-        throw new ForbiddenError("Forbidden");
-      }
-      return Article.findOneAndDelete({ _id: req.params.articleId });
-    })
-    .then((deleteArticle) => {
-      res.send({ data: deleteArticle });
-    })
+  const { articleId } = req.params;
+  const { owner } = req.body;
+
+  Article.authorizeAndDelete({ articleId, reqUserId: req.user._id, ownerId: owner })
+    .then((user) => res.send(user))
     .catch((err) => {
-      console.log(err);
       next(err);
     });
 };

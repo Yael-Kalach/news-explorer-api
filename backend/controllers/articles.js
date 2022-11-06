@@ -12,7 +12,6 @@ const createArticle = (req, res, next) => {
   const {
     keyword, title, text, date, source, link, image,
   } = req.body;
-  console.log(`req.user._id:`, req.user._id)
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
@@ -34,12 +33,21 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  const { articleId } = req.params;
-  const { owner } = req.body;
-
-  Article.authorizeAndDelete({ articleId, reqUserId: req.user._id, ownerId: owner })
-    .then((user) => res.send(user))
+  Article.findOne({ _id: req.params.articleId })
+    .then((article) => {
+      if (!article) {
+        throw new NotFoundError("Article not found");
+      }
+      if (!article.owner.equals(req.user._id)) {
+        throw new ForbiddenError("Forbidden");
+      }
+      return Article.findOneAndDelete({ _id: req.params.articleId });
+    })
+    .then((deleteArticle) => {
+      res.send({ data: deleteArticle });
+    })
     .catch((err) => {
+      console.log(err);
       next(err);
     });
 };

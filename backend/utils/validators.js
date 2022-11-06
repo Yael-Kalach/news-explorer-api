@@ -37,8 +37,8 @@ const getCreateArticlesSchema = {
 };
 
 const getDeleteArticlesSchema = {
-  body: Joi.object().keys({
-    owner: Joi.objectId().required(),
+  params: Joi.object().keys({
+    articleId: Joi.string().hex().length(24),
   }),
 };
 

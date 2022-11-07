@@ -1,4 +1,5 @@
 const Article = require('../models/article');
+const { ErrorHandler } = require('../utils/error');
 
 const getArticles = (req, res, next) => {
   const owner = req.user._id;
@@ -34,12 +35,21 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  const { articleId } = req.params;
-  const { owner } = req.body;
-
-  Article.authorizeAndDelete({ articleId, reqUserId: req.user._id, ownerId: owner })
-    .then((user) => res.send(user))
+  Article.findOne({ _id: req.params.articleId })
+    .then((article) => {
+      if (!article) {
+        throw new ErrorHandler(404, "Article not found");
+      }
+      if (!article.owner.equals(req.user._id)) {
+        throw new ErrorHandler(403, "Forbidden");
+      }
+      return Article.findOneAndDelete({ _id: req.params.articleId });
+    })
+    .then((deleteArticle) => {
+      res.send({ data: deleteArticle });
+    })
     .catch((err) => {
+      console.log(err);
       next(err);
     });
 };

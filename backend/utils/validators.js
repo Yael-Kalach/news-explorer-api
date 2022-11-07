@@ -1,7 +1,7 @@
 const validator = require('validator');
 const { Segments } = require('celebrate');
 const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
+// Joi.objectId = require('joi-objectid')(Joi);
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
@@ -37,8 +37,8 @@ const getCreateArticlesSchema = {
 };
 
 const getDeleteArticlesSchema = {
-  body: Joi.object().keys({
-    owner: Joi.objectId().required(),
+  params: Joi.object().keys({
+    articleId: Joi.string().hex().length(24),
   }),
 };
 

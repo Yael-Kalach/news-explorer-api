@@ -1,7 +1,7 @@
 const validator = require('validator');
 const { Segments } = require('celebrate');
 const Joi = require('joi');
-// Joi.objectId = require('joi-objectid')(Joi);
+Joi.objectId = require('joi-objectid')(Joi);
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {

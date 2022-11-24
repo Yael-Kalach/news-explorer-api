@@ -36,7 +36,7 @@ const { ErrorHandler } = require('./utils/error');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(requestLogger);
-app.use(limiter);
+// app.use(limiter);
 app.use(express.json());
 app.use(helmet());
 app.use(cors());

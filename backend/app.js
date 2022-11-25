@@ -31,7 +31,7 @@ const auth = require('./middlewares/auth');
 // });
 
 // path and port
-const { PORT = 3000 } = process.env;
+const { PORT = 3001 } = process.env;
 const { ErrorHandler } = require('./utils/error');
 
 app.use(express.static(path.join(__dirname, 'public')));

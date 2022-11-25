@@ -35,12 +35,12 @@ const createArticle = (req, res, next) => {
 };
 
 const deleteArticle = (req, res, next) => {
-  Article.findOne({ _id: req.params.articleId })
+  Article.findById(req.params.articleId).select('+owner')
     .then((article) => {
       if (!article) {
         throw new ErrorHandler(404, "Article not found");
       }
-      if (!article.owner.equals(req.user._id)) {
+      if (article.owner.toString() !== req.user._id) {
         throw new ErrorHandler(403, "Forbidden");
       }
       return Article.findOneAndDelete({ _id: req.params.articleId });
